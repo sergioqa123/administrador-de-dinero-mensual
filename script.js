@@ -27,21 +27,12 @@ function agregarEntrada(){
     // Aunque NodeList no es un Array, es posible iterar sobre él
     let textoHTML;
 
-    if (menuDesplegable.value === 'gastos'){
-        textoHTML = `
-        <label class="titulo-label" for="nombre-de-gasto-${numeroDeEntrada}">Nombre de gasto ${numeroDeEntrada}</label>
-        <input type="text" id="nombre-de-gasto-${numeroDeEntrada}" placeholder="Fuente">
-        <label for="cantidad-de-gasto-${numeroDeEntrada}">Cantidad de dinero ${numeroDeEntrada}</label>
-        <input type="number" min="0" id="cantidad-de-gasto-${numeroDeEntrada}" placeholder="Cantidad de dinero">
-        `;
-    } else {
-        textoHTML = `
-        <label class="titulo-label" for="fuente-de-ingresos-${numeroDeEntrada}">Fuente de ingresos ${numeroDeEntrada}</label>
-        <input type="text" id="fuente-de-ingresos-${numeroDeEntrada}" placeholder="Fuente">
-        <label for="cantidad-de-ingreso-${numeroDeEntrada}">Cantidad de dinero ${numeroDeEntrada}</label>
-        <input type="number" min="0" id="cantidad-de-ingreso-${numeroDeEntrada}" placeholder="Cantidad de dinero">
-        `;
-    }
+    textoHTML = `
+        <label class="titulo-label" for="nombre-de-${menuDesplegable.value}-${numeroDeEntrada}">Nombre #${numeroDeEntrada}</label>
+        <input type="text" id="nombre-de-${menuDesplegable.value}-${numeroDeEntrada}" placeholder="Fuente">
+        <label for="cantidad-de-${menuDesplegable.value}-${numeroDeEntrada}">Cantidad #${numeroDeEntrada}</label>
+        <input type="number" min="0" id="cantidad-de-${menuDesplegable.value}-${numeroDeEntrada}" placeholder="Cantidad de dinero">
+    `;
 
     contenedorInputsObjetivo.insertAdjacentHTML('beforeend', textoHTML);
 }
@@ -74,7 +65,7 @@ function calcularPresupuesto(e) {
     const totalIngresos = obtenerCantidades(ingresosInput);
     const totalGastos = obtenerCantidades(gastosInput);
     const presupuestoMensual = obtenerCantidades([prespuestoMensualInput]); // Usamos la funcion para que retorne un Numero
-
+    
     if(esError) { // Verificar si obtenerCantidades lo cambió a true
         return;
     }
