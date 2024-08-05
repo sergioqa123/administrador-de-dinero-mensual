@@ -1,0 +1,68 @@
+:root {
+    --bg-color: #e6e6fa;
+    --font-color: #000000;
+    --border-color: #808080;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.contenedor {
+    max-width: 1000px;
+    padding: 0 100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#gastos, #ingresos{
+    margin: 16px auto;
+    border: 1px solid black;
+}
+
+input {
+    margin-bottom: 8px;
+}
+
+input, select {
+    border: 1px solid var(--border-color);
+}
+
+button {
+    background: linear-gradient(white, CadetBlue);
+    border: 2px solid CadetBlue;
+    cursor: pointer;
+    height: 24px;
+    /* font-weight: bold; */
+    margin: 4px 6px auto auto;
+}
+
+input, select, button {
+    height: 24px;
+    font-size: inherit;
+}
+
+legend {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.contenedor-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-inputs .titulo-label:not(:first-child) {
+    padding-top: 16px;
+}
