@@ -77,8 +77,8 @@ function calcularPresupuesto(e) {
     <span class="${superavitODeficit.toLowerCase()}">${superavitODeficit} de ${Math.abs(presupuestoRestante)} </span>
     <hr>
     <p>Presupuesto Mensual: ${presupuestoMensual}</p>
-    <p>Total de Ingresos: ${presupuestoMensual}</p>
-    <p>Total de Egreesos: ${presupuestoMensual}</p>
+    <p>Total de Ingresos: ${totalIngresos}</p>
+    <p>Total de Gastos: ${totalGastos}</p>
     `
     resultados.classList.remove('oculto');
 }
@@ -89,6 +89,7 @@ function limpiarFormulario(){
         contenedor.innerHTML = '';
     }
     prespuestoMensualInput.value = '';
+    resultados.classList.add('oculto');
 }
 
 agregarOpcion.addEventListener('click', agregarEntrada);
