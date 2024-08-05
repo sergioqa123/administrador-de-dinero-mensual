@@ -1,5 +1,5 @@
 const contadorPresupuesto = document.getElementById('contador-presupuesto');
-const prespuestoMensual = document.getElementById('presupuesto');
+const prespuestoMensualInput = document.getElementById('presupuesto');
 const menuDesplegable = document.getElementById('menu-desplegable');
 const agregarOpcion = document.getElementById('agregar-opcion');
 const botonLimpiar = document.getElementById('limpiar');
@@ -46,11 +46,11 @@ function agregarEntrada(){
     contenedorInputsObjetivo.insertAdjacentHTML('beforeend', textoHTML);
 }
 
-function obtenerCantidades(list){
+function obtenerCantidades(list){ //recibe un array
     let cantidad = 0;
 
     for (item of list) {
-        const valorActual = limpiarEntrada(item);
+        const valorActual = limpiarEntrada(item.value);
         const inputInvalido = esEntradaValida(valorActual);
         if(inputInvalido){
             alert(`Input no válido: ${inputInvalido[0]}`);
@@ -59,15 +59,32 @@ function obtenerCantidades(list){
         } // No es necesario else debido al return;
         
         cantidad += Number(valorActual);
-        // Los inputs se mandan como strings a JS, por ello es importante hacer una conversion
+        // Es importante hacer una conversion porque los inputs se mandan como strings a JS
     }
     return cantidad;
 }
 
 function calcularPresupuesto(e) {
-    e.preventDefault(); // Previene enviar por defecto el objeto Event de submit
-    esError = false; // Esto por si al obtener cantidades cambió a true;
+    e.preventDefault(); // Previene la acción por defecto del objeto Event en submit
+    esError = false; // Esto por si obtenerCantidades lo cambió a true anteriormente
 
+    const ingresosInput = document.querySelectorAll('#ingresos input[type=number]');
+    const gastosInput = document.querySelectorAll('#gastos input[type=number]');
+
+    const totalIngresos = obtenerCantidades(ingresosInput);
+    const totalGastos = obtenerCantidades(gastosInput);
+    const presupuestoMensual = obtenerCantidades([prespuestoMensualInput]); // Usamos la funcion para que retorne un Numero
+
+    if(esError) { // Verificar si obtenerCantidades lo cambió a true
+        return;
+    }
+
+    const presupuestoRestante = presupuestoMensual + totalIngresos - totalGastos;
+    const superavitODeficit = presupuestoRestante < 0 ? 'Deficit' : 'Superavit';
+
+    resultados.innerHTML = `
+    <span class="${superavitODeficit.toLowerCase()}">${superavitODeficit} de ${Math.abs(presupuestoRestante)} <span>
+    `
 }
 
 function limpiarFormulario(){
@@ -75,7 +92,7 @@ function limpiarFormulario(){
     for (const contenedor of contenedorInputs){
         contenedor.innerHTML = '';
     }
-    prespuestoMensual.value = '';
+    prespuestoMensualInput.value = '';
 }
 
 agregarOpcion.addEventListener('click', agregarEntrada);
