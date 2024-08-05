@@ -74,8 +74,13 @@ function calcularPresupuesto(e) {
     const superavitODeficit = presupuestoRestante < 0 ? 'Deficit' : 'Superavit';
 
     resultados.innerHTML = `
-    <span class="${superavitODeficit.toLowerCase()}">${superavitODeficit} de ${Math.abs(presupuestoRestante)} <span>
+    <span class="${superavitODeficit.toLowerCase()}">${superavitODeficit} de ${Math.abs(presupuestoRestante)} </span>
+    <hr>
+    <p>Presupuesto Mensual: ${presupuestoMensual}</p>
+    <p>Total de Ingresos: ${presupuestoMensual}</p>
+    <p>Total de Egreesos: ${presupuestoMensual}</p>
     `
+    resultados.classList.remove('oculto');
 }
 
 function limpiarFormulario(){
