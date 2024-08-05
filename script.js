@@ -64,8 +64,10 @@ function obtenerCantidades(list){
     return cantidad;
 }
 
-function calcularPresupuesto() {
-    
+function calcularPresupuesto(e) {
+    e.preventDefault(); // Previene enviar por defecto el objeto Event de submit
+    esError = false; // Esto por si al obtener cantidades cambió a true;
+
 }
 
 function limpiarFormulario(){
